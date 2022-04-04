@@ -29,21 +29,30 @@
       <div>
         <h1>Weather Dashboard</h1>
       </div>
+      
     </header>
 
     <aside>
       <h3>Search for a City</h3>
       <div class="input">
         <input type="text" class="city" />
-        <br>
-        <br>
-        <input type="submit" value="Submit" class="submitBtn"/>
+        <br />
+        <br />
+        <input type="submit" value="Submit" class="submitBtn" />
       </div>
       <ul></ul>
     </aside>
-
+    <section class="container">
+      <h3 class="cityName">City:</h3>
+      <div class="currentTemp">Current Temperature:</div>
+      <div class="weatherIcon">Conditions</div>
+      <div class="currentWind">Wind:</div>
+      <div class="currentHumidity">Humidity:</div>
+      <div class="uvIndex">UV Index:</div>
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./script.js"></script>
+
   </body>
 </html>
