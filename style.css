@@ -15,3 +15,17 @@ h1{
 textarea {
     color: black;
 }
+
+#leadWeatherBox {
+    border: 1px solid black;
+    text-align: left;
+    margin-left: 25px;
+}
+
+#Name, .weatherCurrent, #currentDay{
+    margin-left: 20px ;
+}
+
+#Name, #currentDay{
+    font-size: 25px;
+}
