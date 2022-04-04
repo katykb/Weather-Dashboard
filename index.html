@@ -8,7 +8,7 @@
 
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <link
       rel="stylesheet"
@@ -25,34 +25,56 @@
     <title>Weather Dashboard</title>
   </head>
   <body>
+    <!-- Navbar goes here -->
     <header>
       <div>
         <h1>Weather Dashboard</h1>
       </div>
-      
     </header>
 
-    <aside>
-      <h3>Search for a City</h3>
-      <div class="input">
-        <input type="text" class="city" />
-        <br />
-        <br />
-        <input type="submit" value="Submit" class="submitBtn" />
+    <!-- Page Layout here -->
+    <div class="row">
+      <div class="col s12 m4 l3">
+        <!-- Note that "m4 l3" was added -->
+        <!-- Grey navigation panel
+
+              This content will be:
+          3-columns-wide on large screens,
+          4-columns-wide on medium screens,
+          12-columns-wide on small screens  -->
+        <aside>
+          <h3>Search for a City</h3>
+          <div class="input">
+            <input type="text" class="city" />
+            <br />
+            <br />
+            <input type="submit" value="Submit" class="submitBtn" />
+          </div>
+          <ul></ul>
+        </aside>
       </div>
-      <ul></ul>
-    </aside>
-    <section class="container">
-      <h3 class="cityName">City:</h3>
-      <div class="currentTemp">Current Temperature:</div>
-      <div class="weatherIcon">Conditions</div>
-      <div class="currentWind">Wind:</div>
-      <div class="currentHumidity">Humidity:</div>
-      <div class="uvIndex">UV Index:</div>
-    </section>
+
+      <div class="col s12 m8 l9">
+        <!-- Note that "m8 l9" was added -->
+        <!-- Teal page content
+
+              This content will be:
+          9-columns-wide on large screens,
+          8-columns-wide on medium screens,
+          12-columns-wide on small screens  -->
+        <section class="container">
+          <h3 class="cityName" id="Name">City:</h3>
+          <div class="currentTemp" id="Temp">Current Temperature:</div>
+          <div class="weatherIcon" id="Icon">Conditions</div>
+          <div class="currentWind" id="Wind">Wind:</div>
+          <div class="currentHumidity" id="Humidity">Humidity:</div>
+          <div class="uvIndex" id="Index">UV Index:</div>
+        </section>
+      </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./script.js"></script>
-
   </body>
 </html>
