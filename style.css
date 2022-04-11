@@ -1,31 +1,40 @@
 header {
-    background-color: blue;
-    background-image: linear-gradient(#12124b, navy);
-    color: white;
-    height: 60px;
-    text-align: center;
+  background-color: blue;
+  background-image: linear-gradient(#12124b, navy);
+  color: white;
+  height: 60px;
+  text-align: center;
+  margin-top: 0%;
 }
 
-h1{
-    font-size: 25px;
-    text-align: center;
-       
+h1 {
+  font-size: 25px;
+  text-align: center;
 }
 
 textarea {
-    color: black;
+  color: black;
 }
 
 #leadWeatherBox {
-    border: 1px solid black;
-    text-align: left;
-    margin-left: 25px;
+  border: 1px solid black;
+  text-align: left;
+  margin-left: 25px;
+  width: 80%;
 }
 
-#Name, .weatherCurrent, #currentDay{
-    margin-left: 20px ;
+.card {
+    width: 80%;
+    margin-left: -25px;
+  }
+
+#Name,
+.weatherCurrent,
+#currentDay {
+  margin-left: 20px;
 }
 
-#Name, #currentDay{
-    font-size: 25px;
+#Name,
+#currentDay {
+  font-size: 25px;
 }

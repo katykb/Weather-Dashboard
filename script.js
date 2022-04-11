@@ -1,7 +1,6 @@
 var searchBtnEl = $(".submitBtn");
 var userInput = $(".city");
-//var cityNameEl = $(".cityName");
-//var currentTempEl = $(".currentTemp");
+
 var weatherIconEl = $(".weatherIcon");
 var currentWindEl = $(".currentWind");
 var currentHumidityEl = $(".currentHumidity");
@@ -34,7 +33,7 @@ searchBtnEl.on("click", function (event) {
           lat +
           "&lon=" +
           lon +
-          "&appid=43261659cb8fa178b54f17f76141e0a4&units=imperial&cnt=5";
+          "&appid=43261659cb8fa178b54f17f76141e0a4&units=imperial&cnt=5&daily";
 
         console.log(weatherApiUrl);
 
@@ -50,7 +49,8 @@ searchBtnEl.on("click", function (event) {
 
             document.getElementById("Temp").textContent =
               "Temp:" + " " + tempValue + "\u00B0 F";
-            document.getElementById("Icon").textContent = weatherIconValue;
+            document.getElementById("weatherImage").textContent =
+              data.current.weather[0].icon + weatherIconValue;
             document.getElementById("Wind").textContent =
               "Wind:" + " " + currentWindValue + "MPH";
             document.getElementById("Humidity").textContent =
@@ -59,34 +59,59 @@ searchBtnEl.on("click", function (event) {
               "UV Index" + " " + currentUvIndexValue;
 
             console.log(data);
-            // console.log(tempValue);
-            // console.log(weatherIconValue);
-            // console.log(currentWindValue);
-            // console.log(currentHumidityValue);
-            // console.log(currentUvIndexValue);
-            // console.log(descValue);
 
-            // function fetchForcast(lat, lon) {
-            //   var forecastAPI =
-            //   "https://api.openweathermap.org/data/2.5/onecall?lat="+
-            //     lat +
-            //     "&lon=" +
-            //     lon +
-            //     "&appid=0e0302d8420bd377d72e92eb9e2f4787&units=imperial&cnt=5";
+            function getForecast(lat, lon) {
+              var forecastAPI =
+                "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+                lat +
+                "&lon=" +
+                lon +
+                "&exclude=current,hourly,minutely,alerts&appid=43261659cb8fa178b54f17f76141e0a4&units=imperial";
+              var startdate = moment();
 
-            //   //console.log(forcastAPI);
-            //   fetch(forecastAPI)
-            //   .then((response) => response.json())
-            //   .then((data) => {
-            //     console.log(data);
-            //   });
-            // }
-            // fetchForcast(lat, lon);
-              
-           
+              startdate = startdate.subtract(1, "days");
+              startdate = startdate.format("DD-MM-YYYY");
+              console.log(forecastAPI);
+
+              fetch(forecastAPI)
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log(data);
+                  var forecastEl = $(".forecast");
+                  var fday = "";
+                  data.daily.forEach((value, index) => {
+                    if (index > 0)
+                      if (index < 6) {
+                        var date = new Date(value.dt * 1000).toLocaleDateString(
+                          "en",
+                          {
+                            weekday: "long",
+                          }
+                        );
+                        var imageIcon = value[""].weather[0].icon.toFixed(0);
+                        var temp = value.temp.day.toFixed(0);
+                        var wind = value.wind_gust.toFixed(0);
+                        var humidity = value.humidity.toFixed(0);
+                        fday = `<div class ="forecast-day">
+                  <div class="col s12 m3">
+                  <div class="card #1a237e indigo darken-4 white-text">
+                  <p>${date}<p>
+                  <div class="forecast-day--conditions"><img src=" http://openweathermap.org/img/wn/${imageIcon}10d@2x.png"/></div>
+                  <div class="forecast-day--temp">Temp: ${temp}<sup>\u00B0F</sup></div>
+                  <div class="forecast-day--wind">Wind: ${wind}MPH</div>
+                  <div class="forecast-day--humidity">Humidity: ${humidity}%</div>
+                  </div>
+                  </div>
+                  </div>`;
+                        forecastEl[0].insertAdjacentHTML("beforeend", fday);
+                      }
+                  });
+                });
+            }
+            getForecast(lat, lon);
           });
       }
 
       fetchWeather(lat, lon);
     });
-  });
+});
