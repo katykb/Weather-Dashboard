@@ -4,7 +4,7 @@ var userInput = $(".city");
 var weatherIconEl = $(".weatherIcon");
 var currentWindEl = $(".currentWind");
 var currentHumidityEl = $(".currentHumidity");
-var uvIndexEl = $(".uvIndex");
+var uvIndexEl = document.querySelector(".uvIndex");
 
 var today = moment();
 $("#currentDay").text(today.format("MMM Do, YYYY"));
@@ -60,28 +60,23 @@ searchBtnEl.on("click", function (event) {
 
             console.log(data);
 
-            if (currentUvIndexValue <= 2) {
-              $(this).addClass(".low");
-              $(this).removeClass(".moderate");
-              $(this).removeClass(".high");
-              $(this).removeClass(".veryHigh");
+            // function setUVColor (currentUvIndexValue){
+            console.log(currentUvIndexValue);
+
+            uvIndexEl.classList.remove("veryHigh");
+            uvIndexEl.classList.remove("moderate");
+            uvIndexEl.classList.remove("high");
+            uvIndexEl.classList.remove("low");
+            if (currentUvIndexValue > 8) {
+              uvIndexEl.classList.add("veryHigh");
+            } else if (currentUvIndexValue > 6) {
+              uvIndexEl.classList.add("high");
+            } else if (currentUvIndexValue > 3) {
+              uvIndexEl.classList.add("moderate");
+            } else {
+              uvIndexEl.classList.add("low");
             }
-              // } else if (currentUvIndexValue >= 3 && currentUvIndexValue <= 5) {
-            //   $(this).addClass(".moderate");
-            //   $(this).removeClass(".high");
-            //   $(this).removeClass(".veryHigh");
-            //   $(this).removeClass(".low");
-            // } else if (currentUvIndexValue >= 6 && currentUvIndexValue <=7) {
-            //   $(this).addClass(".high");
-            //   $(this).removeClass(".veryHigh");
-            //   $(this).removeClass(".low");
-            //   $(this).removeClass(".moderate");
-            // } else if (currentUvIndexValue >= 8 && currentUvIndexValue <= 10) {
-            //   $(this).addClass(".veryHigh");
-            //   $(this).removeClass(".low");
-            //   $(this).removeClass(".moderate");
-            //   $(this).removeClass(".high");
-            // }
+        
             console.log(currentUvIndexValue);
 
             function getForecast(lat, lon) {
@@ -133,6 +128,7 @@ searchBtnEl.on("click", function (event) {
                 });
             }
             getForecast(lat, lon);
+            // setUVColor();
           });
       }
 
