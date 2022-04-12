@@ -23,6 +23,22 @@ textarea {
   width: 80%;
 }
 
+.low {
+    background-color: green;
+  }
+  
+  .moderate {
+    background-color: yellow;
+     }
+  
+  .high{
+    background-color: orange;
+     }
+
+  .veryHigh{
+      background-color: red;
+  }
+
 .card {
     width: 80%;
     margin-left: -25px;

@@ -60,6 +60,30 @@ searchBtnEl.on("click", function (event) {
 
             console.log(data);
 
+            if (currentUvIndexValue <= 2) {
+              $(this).addClass(".low");
+              $(this).removeClass(".moderate");
+              $(this).removeClass(".high");
+              $(this).removeClass(".veryHigh");
+            }
+              // } else if (currentUvIndexValue >= 3 && currentUvIndexValue <= 5) {
+            //   $(this).addClass(".moderate");
+            //   $(this).removeClass(".high");
+            //   $(this).removeClass(".veryHigh");
+            //   $(this).removeClass(".low");
+            // } else if (currentUvIndexValue >= 6 && currentUvIndexValue <=7) {
+            //   $(this).addClass(".high");
+            //   $(this).removeClass(".veryHigh");
+            //   $(this).removeClass(".low");
+            //   $(this).removeClass(".moderate");
+            // } else if (currentUvIndexValue >= 8 && currentUvIndexValue <= 10) {
+            //   $(this).addClass(".veryHigh");
+            //   $(this).removeClass(".low");
+            //   $(this).removeClass(".moderate");
+            //   $(this).removeClass(".high");
+            // }
+            console.log(currentUvIndexValue);
+
             function getForecast(lat, lon) {
               var forecastAPI =
                 "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -88,15 +112,15 @@ searchBtnEl.on("click", function (event) {
                             weekday: "long",
                           }
                         );
-                        var imageIcon = value[""].weather[0].icon.toFixed(0);
-                        var temp = value.temp.day.toFixed(0);
-                        var wind = value.wind_gust.toFixed(0);
-                        var humidity = value.humidity.toFixed(0);
+                        var imageIcon = value.weather[0].icon;
+                        var temp = value.temp.day;
+                        var wind = value.wind_gust;
+                        var humidity = value.humidity;
                         fday = `<div class ="forecast-day">
                   <div class="col s12 m3">
                   <div class="card #1a237e indigo darken-4 white-text">
                   <p>${date}<p>
-                  <div class="forecast-day--conditions"><img src=" http://openweathermap.org/img/wn/${imageIcon}10d@2x.png"/></div>
+                  <div class="forecast-day--conditions"><img src=" http://openweathermap.org/img/wn/${imageIcon}.png"/></div>
                   <div class="forecast-day--temp">Temp: ${temp}<sup>\u00B0F</sup></div>
                   <div class="forecast-day--wind">Wind: ${wind}MPH</div>
                   <div class="forecast-day--humidity">Humidity: ${humidity}%</div>
