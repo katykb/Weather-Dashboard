@@ -96,7 +96,7 @@ searchBtnEl.on("click", function (event) {
                 .then((response) => response.json())
                 .then((data) => {
                   console.log(data);
-                  var forecastEl = $(".forecast");
+                  var forecastEl = document.querySelector(".forecast")
                   var fday = "";
                   data.daily.forEach((value, index) => {
                     if (index > 0)
@@ -111,7 +111,7 @@ searchBtnEl.on("click", function (event) {
                         var temp = value.temp.day;
                         var wind = value.wind_gust;
                         var humidity = value.humidity;
-                        fday = `<div class ="forecast-day">
+                        fday += `<div class ="forecast-day">
                   <div class="col s12 m3">
                   <div class="card #1a237e indigo darken-4 white-text">
                   <p>${date}<p>
@@ -122,8 +122,10 @@ searchBtnEl.on("click", function (event) {
                   </div>
                   </div>
                   </div>`;
-                        forecastEl[0].insertAdjacentHTML("beforeend", fday);
-                      }
+                        }
+                        
+                        forecastEl.innerHTML = fday
+                      
                   });
                 });
             }
