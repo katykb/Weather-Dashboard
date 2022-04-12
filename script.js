@@ -86,10 +86,7 @@ searchBtnEl.on("click", function (event) {
                 "&lon=" +
                 lon +
                 "&exclude=current,hourly,minutely,alerts&appid=43261659cb8fa178b54f17f76141e0a4&units=imperial";
-              var startdate = moment();
-
-              startdate = startdate.subtract(1, "days");
-              startdate = startdate.format("DD-MM-YYYY");
+                            
               console.log(forecastAPI);
 
               fetch(forecastAPI)
@@ -101,12 +98,7 @@ searchBtnEl.on("click", function (event) {
                   data.daily.forEach((value, index) => {
                     if (index > 0)
                       if (index < 6) {
-                        var date = new Date(value.dt * 1000).toLocaleDateString(
-                          "en",
-                          {
-                            weekday: "long",
-                          }
-                        );
+                        var date = moment().add(index,"days").format("MM/DD/YY")
                         var imageIcon = value.weather[0].icon;
                         var temp = value.temp.day;
                         var wind = value.wind_gust;
