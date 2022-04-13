@@ -9,19 +9,7 @@ var uvIndexEl = document.querySelector(".uvIndex");
 var today = moment();
 $("#currentDay").text(today.format("MMM Do, YYYY"));
 
-
-function displayLocalStorage() {
-  var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
-  var cityBtn = "";
-  for (let i = 0; i < recentSearch.length; i++) {
-    cityBtn += `<li><a class="waves-effect waves-light btn-large #b0bec5 blue-grey lighten-3 black-text cityBtn">
-    ${recentSearch[i]}</a></li>`;
-  }
- 
-  document.querySelector(".recentSearch").innerHTML = cityBtn;
-}
-
-displayLocalStorage();
+//displayLocalStorage();
 
 searchBtnEl.on("click", function (event) {
   console.log(userInput[0].value);
@@ -74,7 +62,6 @@ searchBtnEl.on("click", function (event) {
 
             console.log(data);
 
-            // function setUVColor (currentUvIndexValue){
             console.log(currentUvIndexValue);
 
             uvIndexEl.classList.remove("veryHigh");
@@ -141,7 +128,18 @@ searchBtnEl.on("click", function (event) {
           });
       }
 
+      //function displayLocalStorage() {
+        var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
+        var cityBtn = "";
+        for (let i = 0; i < recentSearch.length; i++) {
+          cityBtn += `<li><a class="waves-effect waves-light btn-large #b0bec5 blue-grey lighten-3 black-text cityBtn">
+          ${recentSearch[i]}</a></li>`;
+        }
+      //}
+      localStorage.setItem("WeatherAPI", JSON.stringify(recentSearch));
+
+      document.querySelector(".recentSearch").innerHTML = cityBtn;
+      //displayLocalStorage();
       fetchWeather(lat, lon);
-      displayLocalStorage();
     });
 });
