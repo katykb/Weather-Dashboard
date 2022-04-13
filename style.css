@@ -16,6 +16,14 @@ textarea {
   color: black;
 }
 
+.input{
+  border-bottom: solid black 2px;
+}
+
+.city {
+  border: solid black 1px;
+}
+
 #leadWeatherBox {
   border: 1px solid black;
   text-align: left;
@@ -40,9 +48,26 @@ textarea {
   }
 
 .card {
-    width: 80%;
-    margin-left: -25px;
+    width: 120%;
+    margin-left: 0px;
   }
+
+  .cityBtn{
+    text-align: center;
+    margin-left: 75px;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .submitBtn{
+    width: 200px;
+    margin-left: 75px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+ 
 
 #Name,
 .weatherCurrent,

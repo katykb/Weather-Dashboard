@@ -9,6 +9,20 @@ var uvIndexEl = document.querySelector(".uvIndex");
 var today = moment();
 $("#currentDay").text(today.format("MMM Do, YYYY"));
 
+
+function displayLocalStorage() {
+  var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
+  var cityBtn = "";
+  for (let i = 0; i < recentSearch.length; i++) {
+    cityBtn += `<li><a class="waves-effect waves-light btn-large #b0bec5 blue-grey lighten-3 black-text cityBtn">
+    ${recentSearch[i]}</a></li>`;
+  }
+ 
+  document.querySelector(".recentSearch").innerHTML = cityBtn;
+}
+
+displayLocalStorage();
+
 searchBtnEl.on("click", function (event) {
   console.log(userInput[0].value);
   var locationApiUrl =
@@ -76,7 +90,7 @@ searchBtnEl.on("click", function (event) {
             } else {
               uvIndexEl.classList.add("low");
             }
-        
+
             console.log(currentUvIndexValue);
 
             function getForecast(lat, lon) {
@@ -86,25 +100,27 @@ searchBtnEl.on("click", function (event) {
                 "&lon=" +
                 lon +
                 "&exclude=current,hourly,minutely,alerts&appid=43261659cb8fa178b54f17f76141e0a4&units=imperial";
-                            
+
               console.log(forecastAPI);
 
               fetch(forecastAPI)
                 .then((response) => response.json())
                 .then((data) => {
                   console.log(data);
-                  var forecastEl = document.querySelector(".forecast")
+                  var forecastEl = document.querySelector(".forecast");
                   var fday = "";
                   data.daily.forEach((value, index) => {
                     if (index > 0)
                       if (index < 6) {
-                        var date = moment().add(index,"days").format("MM/DD/YY")
+                        var date = moment()
+                          .add(index, "days")
+                          .format("MM/DD/YY");
                         var imageIcon = value.weather[0].icon;
                         var temp = value.temp.day;
                         var wind = value.wind_gust;
                         var humidity = value.humidity;
                         fday += `<div class ="forecast-day">
-                  <div class="col s12 m3">
+                  <div class="col s12 m2">
                   <div class="card #1a237e indigo darken-4 white-text">
                   <p>${date}<p>
                   <div class="forecast-day--conditions"><img src=" http://openweathermap.org/img/wn/${imageIcon}.png"/></div>
@@ -114,10 +130,9 @@ searchBtnEl.on("click", function (event) {
                   </div>
                   </div>
                   </div>`;
-                        }
-                        
-                        forecastEl.innerHTML = fday
-                      
+                      }
+
+                    forecastEl.innerHTML = fday;
                   });
                 });
             }
@@ -127,5 +142,6 @@ searchBtnEl.on("click", function (event) {
       }
 
       fetchWeather(lat, lon);
+      displayLocalStorage();
     });
 });
