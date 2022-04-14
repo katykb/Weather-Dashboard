@@ -9,8 +9,6 @@ var uvIndexEl = document.querySelector(".uvIndex");
 var today = moment();
 $("#currentDay").text(today.format("MMM Do, YYYY"));
 
-//displayLocalStorage();
-
 searchBtnEl.on("click", function (event) {
   console.log(userInput[0].value);
   var locationApiUrl =
@@ -28,6 +26,14 @@ searchBtnEl.on("click", function (event) {
       console.log(lat, lon, name);
 
       document.getElementById("Name").textContent = "Name:" + " " + name;
+      var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
+      recentSearch.unshift(name);
+      recentSearch=Array.from(new Set(recentSearch));      
+      localStorage.setItem(
+        "WeatherAPI",
+        JSON.stringify(recentSearch.slice(0, 10))
+      );
+      console.log(recentSearch);
 
       function fetchWeather(lat, lon) {
         var weatherApiUrl =
@@ -124,22 +130,32 @@ searchBtnEl.on("click", function (event) {
                 });
             }
             getForecast(lat, lon);
-            // setUVColor();
           });
       }
 
-      //function displayLocalStorage() {
-        var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
-        var cityBtn = "";
-        for (let i = 0; i < recentSearch.length; i++) {
-          cityBtn += `<li><a class="waves-effect waves-light btn-large #b0bec5 blue-grey lighten-3 black-text cityBtn">
-          ${recentSearch[i]}</a></li>`;
-        }
-      //}
-      localStorage.setItem("WeatherAPI", JSON.stringify(recentSearch));
-
-      document.querySelector(".recentSearch").innerHTML = cityBtn;
-      //displayLocalStorage();
       fetchWeather(lat, lon);
+      displayLocalStorage();
     });
 });
+
+function displayLocalStorage() {
+  var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
+  var cityBtn = "";
+  for (let i = 0; i < recentSearch.length; i++) {
+    cityBtn += `<li><a class="waves-effect waves-light btn-large #b0bec5 blue-grey lighten-3 black-text cityBtn">
+    ${recentSearch[i]}</a></li>`;
+    //recentSearch.push(name)
+    //localStorage.setItem(recentSearch, (cityBtn))
+  }
+  document.querySelector(".recentSearch").innerHTML = cityBtn;
+  var cityBtns = document.querySelectorAll(".cityBtn");
+  for (let btn of cityBtns) {
+    btn.addEventListener("click", () => {
+      let city = btn.textContent;
+      userInput.val(city);
+      searchBtnEl.trigger("click");
+    });
+  }
+}
+
+displayLocalStorage();
