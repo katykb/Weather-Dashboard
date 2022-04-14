@@ -9,6 +9,7 @@ var uvIndexEl = document.querySelector(".uvIndex");
 var today = moment();
 $("#currentDay").text(today.format("MMM Do, YYYY"));
 
+//The click event that begins the search
 searchBtnEl.on("click", function (event) {
   console.log(userInput[0].value);
   var locationApiUrl =
@@ -26,6 +27,8 @@ searchBtnEl.on("click", function (event) {
       console.log(lat, lon, name);
 
       document.getElementById("Name").textContent = "Name:" + " " + name;
+
+      //displays the stored cities from the search and displays them after refresh
       var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
       recentSearch.unshift(name);
       recentSearch=Array.from(new Set(recentSearch));      
@@ -35,6 +38,7 @@ searchBtnEl.on("click", function (event) {
       );
       console.log(recentSearch);
 
+      //takes the lat and lon and gives current weather conditions
       function fetchWeather(lat, lon) {
         var weatherApiUrl =
           "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -70,6 +74,7 @@ searchBtnEl.on("click", function (event) {
 
             console.log(currentUvIndexValue);
 
+            //sets the color code for uv index
             uvIndexEl.classList.remove("veryHigh");
             uvIndexEl.classList.remove("moderate");
             uvIndexEl.classList.remove("high");
@@ -86,6 +91,7 @@ searchBtnEl.on("click", function (event) {
 
             console.log(currentUvIndexValue);
 
+            //5 day forecast
             function getForecast(lat, lon) {
               var forecastAPI =
                 "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -138,6 +144,7 @@ searchBtnEl.on("click", function (event) {
     });
 });
 
+//the city added to the list of recent searches
 function displayLocalStorage() {
   var recentSearch = JSON.parse(localStorage.getItem("WeatherAPI")) || [];
   var cityBtn = "";
@@ -147,6 +154,7 @@ function displayLocalStorage() {
     //recentSearch.push(name)
     //localStorage.setItem(recentSearch, (cityBtn))
   }
+  //makes recent search cities clickable
   document.querySelector(".recentSearch").innerHTML = cityBtn;
   var cityBtns = document.querySelectorAll(".cityBtn");
   for (let btn of cityBtns) {
