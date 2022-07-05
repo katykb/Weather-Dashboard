@@ -1,38 +1,69 @@
+body{
+  background-image: url('./assest/weatherApp.jpg');
+  background-size: cover;
+   
+}
+
 header {
-  background-color: blue;
-  background-image: linear-gradient(#12124b, navy);
-  color: white;
+   color: white;
   height: 100px;
   text-align: center;
-  margin-top: 0px;
+  margin-top: -75px;
   position: sticky;
+}
+
+.top{
+  background-color: blue;
+  background-image: linear-gradient(#12124b, navy);
+  height: 100px;
 }
 
 h1 {
-  font-size: 25px;
+  font-size: 60px;
   text-align: center;
   margin-top: 0px;
   position: sticky;
 
 }
 
+h3{
+  color: whitesmoke;
+  font-weight: 700;
+}
+
 textarea {
-  color: black;
+  color: whitesmoke;
 }
 
 .input {
-  border-bottom: solid black 2px;
+  border-bottom: solid whitesmoke;
 }
 
 .city {
-  border: solid black 1px;
+  border: whitesmoke;
 }
 
 #leadWeatherBox {
-  border: 1px solid black;
+  border: 2px solid whitesmoke;
   text-align: left;
   margin-left: 25px;
   width: 80%;
+  color: whitesmoke;
+}
+
+#currentDay {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.cityName {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.weatherCurrent{
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .low {
@@ -76,6 +107,7 @@ textarea {
   margin-left: 75px;
   margin-bottom: 5px;
   text-align: center;
+  color: whitesmoke;
 }
 
 #Name,
